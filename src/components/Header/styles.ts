@@ -23,8 +23,15 @@ export const LocalMapButton = styled.button`
   background-color: ${(props) => props.theme.purpleLight};
   color: ${(props) => props.theme.purpleDark};
 
-  svg: {
-    color: ${(props) => props.theme.purpleDark};
+  img {
+    height: 1.375rem;
+    width: 1.375rem;
+  }
+
+  p {
+    font-size: ${(props) => props.theme.roboto.fontSize.s};
+    font-weight: ${(props) => props.theme.roboto.weight.m};
+    line-height: ${(props) => props.theme.roboto.lineHeight.s};
   }
 `
 
@@ -39,7 +46,8 @@ export const ShoppingCartButton = styled.button`
   background-color: ${(props) => props.theme.yellowLight};
   color: ${(props) => props.theme.purpleDark};
 
-  svg: {
-    color: ${(props) => props.theme.yellowDark};
+  img {
+    height: 1.375rem;
+    width: 1.375rem;
   }
 `

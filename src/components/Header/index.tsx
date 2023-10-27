@@ -6,7 +6,8 @@ import {
   UserItens,
 } from './styles'
 import coffeeLogo from '../../assets/Logo.svg'
-import { MapPin, ShoppingCart } from 'phosphor-react'
+import shoppingCart from '../../assets/shopping_cart.svg'
+import mapIndicator from '../../assets/map_indicator.svg'
 
 export function Header() {
   return (
@@ -16,11 +17,11 @@ export function Header() {
       </IconWrapper>
       <UserItens>
         <LocalMapButton>
-          <MapPin height={22} />
-          Porto Alegre, RS
+          <img src={mapIndicator} alt="" />
+          <p>Porto Alegre, RS</p>
         </LocalMapButton>
         <ShoppingCartButton>
-          <ShoppingCart />
+          <img src={shoppingCart} alt="" />
         </ShoppingCartButton>
       </UserItens>
     </Container>
