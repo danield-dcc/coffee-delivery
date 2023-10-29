@@ -29,11 +29,7 @@ export const defaultTheme = {
       xs: '18px',
     },
     lineHeight: {
-      xl: '130%',
-      l: '130%',
-      m: '130%',
-      s: '130%',
-      xs: '130%',
+      default: '130%',
     },
     weight: {
       xl: 'extrabold',
