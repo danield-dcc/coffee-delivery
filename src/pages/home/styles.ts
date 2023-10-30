@@ -94,3 +94,20 @@ export const MainImage = styled.div`
     width: 29.75rem;
   }
 `
+
+export const ListAllCoffees = styled.p`
+  font-family: 'Baloo 2';
+  font-size: ${(props) => props.theme.ballo.fontSize.l};
+  font-weight: ${(props) => props.theme.ballo.weight.l};
+  line-height: ${(props) => props.theme.ballo.lineHeight.default};
+  color: ${(props) => props.theme.baseSubtitle};
+  margin-top: 6.75rem;
+  margin-left: 1rem;
+`
+
+export const DisplayCofferCards = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding-top: 3.375rem;
+`

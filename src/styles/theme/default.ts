@@ -1,7 +1,7 @@
 export const defaultTheme = {
   white: '#fff',
 
-  baseButton: '##E6E5E5',
+  baseButton: '#E6E5E5',
   baseInput: '#EDEDED',
   baseCard: '#F3F2F2',
   background: '#FAFAFA',
@@ -46,7 +46,7 @@ export const defaultTheme = {
       m: '16px',
       s: '14px',
       xs: '12px',
-      tag: '20px',
+      tag: '10px',
       buttonG: '14px',
       buttonM: '12px',
     },

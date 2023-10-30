@@ -2,10 +2,12 @@ import {
   Content,
   ContentSubTitle,
   ContentTittle,
+  DisplayCofferCards,
   HeroSectionContainer,
   HomeContainer,
   IconWrapper,
   ItemWrapper,
+  ListAllCoffees,
   MainImage,
   Wrapper,
 } from './styles'
@@ -17,6 +19,7 @@ import mugCoffee from '../../assets/HeroSection/MugCoffee.svg'
 import coffeDelivery from '../../assets/HeroSection/CoffeDelivery.png'
 
 import data from '../../../db/db.json'
+import { CoffeeCard } from '../../components/CoffeeCard'
 
 export function Home() {
   // console.log(coffes)
@@ -65,14 +68,20 @@ export function Home() {
         </HomeContainer>
       </HeroSectionContainer>
 
-      <ul>
+      <ListAllCoffees>Nossos cafés</ListAllCoffees>
+
+      <DisplayCofferCards>
         {data.map((items) => (
-          <>
-            <li key={items.id}>{items.name}</li>
-            <img src={items.coffeeImageUrl} alt="" />
-          </>
+          <CoffeeCard
+            key={items.id}
+            tittle={items.name}
+            subTittle={items.description}
+            tag={items.tags}
+            value={items.value}
+            image={items.coffeeImageUrl}
+          />
         ))}
-      </ul>
+      </DisplayCofferCards>
     </>
   )
 }
