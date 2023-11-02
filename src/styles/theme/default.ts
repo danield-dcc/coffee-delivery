@@ -20,7 +20,12 @@ export const defaultTheme = {
   yellow: '#DBAC2C',
   yellowLight: '#F1E9C9',
 
-  ballo: {
+  fontFamily: {
+    Title: 'Baloo 2',
+    Text: 'Roboto',
+  },
+
+  title: {
     fontSize: {
       xl: '48px',
       l: '32px',
@@ -40,7 +45,7 @@ export const defaultTheme = {
     },
   },
 
-  roboto: {
+  text: {
     fontSize: {
       l: '20px',
       m: '16px',
@@ -57,14 +62,17 @@ export const defaultTheme = {
       xs: '130%',
       tag: '130%',
       buttonG: '160%',
+      buttonM: '160%',
     },
     weight: {
-      l: 'regular',
-      m: 'regular',
-      s: 'bold',
+      bold: 'bold',
+      l: '400',
+      m: '400',
+      s: '400',
       xs: 'bold',
       tag: 'bold',
-      buttonG: 'regular',
+      buttonG: 'bold',
+      buttonM: '400',
     },
   },
 }

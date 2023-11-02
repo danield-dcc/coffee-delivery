@@ -29,9 +29,9 @@ export const LocalMapButton = styled.button`
   }
 
   p {
-    font-size: ${(props) => props.theme.roboto.fontSize.s};
-    font-weight: ${(props) => props.theme.roboto.weight.m};
-    line-height: ${(props) => props.theme.roboto.lineHeight.s};
+    font-size: ${(props) => props.theme.text.fontSize.s};
+    font-weight: ${(props) => props.theme.text.weight.m};
+    line-height: ${(props) => props.theme.text.lineHeight.s};
   }
 `
 

@@ -36,16 +36,16 @@ export const Content = styled.div`
 export const ContentTittle = styled.p`
   font-family: 'Baloo 2';
   font-weight: 700;
-  font-size: ${(props) => props.theme.ballo.fontSize.xl};
-  line-height: ${(props) => props.theme.ballo.lineHeight.default};
+  font-size: ${(props) => props.theme.title.fontSize.xl};
+  line-height: ${(props) => props.theme.title.lineHeight.default};
   color: ${(props) => props.theme.baseTitle};
 `
 
 export const ContentSubTitle = styled.p`
   font-family: 'Roboto';
-  font-weight: ${(props) => props.theme.roboto.weight.l};
-  font-size: ${(props) => props.theme.roboto.fontSize.l};
-  line-height: ${(props) => props.theme.roboto.lineHeight.l};
+  font-weight: ${(props) => props.theme.text.weight.l};
+  font-size: ${(props) => props.theme.text.fontSize.l};
+  line-height: ${(props) => props.theme.text.lineHeight.l};
   color: ${(props) => props.theme.baseText};
 `
 
@@ -75,9 +75,9 @@ export const IconWrapper = styled.div<WrapperIconsProps>`
   }
 
   span {
-    font-size: ${(props) => props.theme.roboto.fontSize.m};
-    font-weight: ${(props) => props.theme.roboto.weight.m};
-    line-height: ${(props) => props.theme.roboto.fontSize.m};
+    font-size: ${(props) => props.theme.text.fontSize.m};
+    font-weight: ${(props) => props.theme.text.weight.m};
+    line-height: ${(props) => props.theme.text.fontSize.m};
   }
 `
 
@@ -96,10 +96,10 @@ export const MainImage = styled.div`
 `
 
 export const ListAllCoffees = styled.p`
-  font-family: 'Baloo 2';
-  font-size: ${(props) => props.theme.ballo.fontSize.l};
-  font-weight: ${(props) => props.theme.ballo.weight.l};
-  line-height: ${(props) => props.theme.ballo.lineHeight.default};
+  font-family: ${(props) => props.theme.fontFamily.Title};
+  font-size: ${(props) => props.theme.title.fontSize.l};
+  font-weight: ${(props) => props.theme.title.weight.l};
+  line-height: ${(props) => props.theme.title.lineHeight.default};
   color: ${(props) => props.theme.baseSubtitle};
   margin-top: 6.75rem;
   margin-left: 1rem;
@@ -110,4 +110,6 @@ export const DisplayCofferCards = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   padding-top: 3.375rem;
+
+  padding-bottom: 157px;
 `

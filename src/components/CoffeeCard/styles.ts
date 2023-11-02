@@ -33,9 +33,9 @@ export const CardTag = styled.div`
   p {
     text-transform: uppercase;
     color: ${(props) => props.theme.yellowDark};
-    font-size: ${(props) => props.theme.roboto.fontSize.tag};
-    line-height: ${(props) => props.theme.roboto.lineHeight.tag};
-    font-weight: ${(props) => props.theme.roboto.weight.tag};
+    font-size: ${(props) => props.theme.text.fontSize.tag};
+    line-height: ${(props) => props.theme.text.lineHeight.tag};
+    font-weight: ${(props) => props.theme.text.weight.tag};
   }
 `
 
@@ -44,11 +44,11 @@ export const CardTittle = styled.p`
   align-self: center;
   margin-top: 1rem;
 
-  font-family: 'Baloo 2';
+  font-family: ${(props) => props.theme.fontFamily.Title};
   color: ${(props) => props.theme.baseSubtitle};
-  font-size: ${(props) => props.theme.ballo.fontSize.s};
-  line-height: ${(props) => props.theme.ballo.lineHeight.default};
-  font-weight: ${(props) => props.theme.ballo.weight.s};
+  font-size: ${(props) => props.theme.title.fontSize.s};
+  line-height: ${(props) => props.theme.title.lineHeight.default};
+  font-weight: ${(props) => props.theme.title.weight.s};
 `
 
 export const CardSubTittle = styled.p`
@@ -56,9 +56,9 @@ export const CardSubTittle = styled.p`
   text-align: center;
   margin: 0.5rem 1.25rem 0;
   color: ${(props) => props.theme.baseLabel};
-  font-size: ${(props) => props.theme.roboto.fontSize.s};
-  line-height: ${(props) => props.theme.roboto.lineHeight.s};
-  font-weight: ${(props) => props.theme.roboto.weight.m};
+  font-size: ${(props) => props.theme.text.fontSize.s};
+  line-height: ${(props) => props.theme.text.lineHeight.s};
+  font-weight: ${(props) => props.theme.text.weight.m};
 `
 
 export const CardBuyOutContent = styled.div`
@@ -69,7 +69,7 @@ export const CardBuyOutContent = styled.div`
   margin: 2.062rem 22px 20px 22px;
 
   span {
-    font-family: 'Baloo 2';
+    font-family: ${(props) => props.theme.fontFamily.Title};
     color: ${(props) => props.theme.baseText};
     font-size: 1.5rem;
   }
@@ -146,8 +146,8 @@ export const CartButton = styled.button`
   margin-left: 2px;
   border: none;
 
-  width: 38px;
-  height: 38px;
+  width: 2.375rem;
+  height: 2.375rem;
   border-radius: 6px;
 
   svg {
