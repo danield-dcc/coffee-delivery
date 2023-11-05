@@ -103,7 +103,7 @@ export const BuyoutShowTotalCoffees = styled.div`
   width: 1.25rem;
 `
 
-export const RemoveCoffee = styled.div`
+export const RemoveCoffee = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,6 +113,7 @@ export const RemoveCoffee = styled.div`
   width: 100%;
   height: 2rem;
   border-radius: 6px;
+  border: none;
 
   &:hover {
     background-color: ${(props) => props.theme.baseHover};

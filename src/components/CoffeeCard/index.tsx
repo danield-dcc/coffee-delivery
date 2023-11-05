@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { moneyFormatter } from '../../utils/moneyFormater'
+import { useEffect, useState } from 'react'
+import { useBuyoutCoffeeContext } from '../../contexts/CoffeeContext'
 import {
   CardBuyOutContent,
   CardContainer,
@@ -14,13 +14,16 @@ import {
   CartButton,
 } from './styles'
 import { ShoppingCartSimple } from 'phosphor-react'
+import { moneyFormatter } from '../../utils/moneyFormatter'
 
-interface CoffeeCardProps {
+interface ICoffeeCardProps {
   image: string
   tittle: string
   subTittle: string
   value: number
   tag: string[]
+  total?: number
+  buyCoffee: () => void
 }
 
 export function CoffeeCard({
@@ -29,8 +32,16 @@ export function CoffeeCard({
   tittle,
   value,
   tag,
-}: CoffeeCardProps) {
-  const [totalSelectedCoffees, setTotalSelectedCoffees] = useState(0)
+  buyCoffee,
+  total,
+}: ICoffeeCardProps) {
+  const { setNumberOfCoffeesSelected } = useBuyoutCoffeeContext()
+  const [totalSelectedCoffees, setTotalSelectedCoffees] = useState(total || 0)
+
+  useEffect(() => {
+    setNumberOfCoffeesSelected(totalSelectedCoffees)
+  }, [setNumberOfCoffeesSelected, totalSelectedCoffees])
+
   return (
     <CardContainer>
       <CardImg src={image} alt="" />
@@ -67,7 +78,7 @@ export function CoffeeCard({
           <p>+</p>
         </AddCoffeeButton>
 
-        <CartButton>
+        <CartButton onClick={buyCoffee}>
           <ShoppingCartSimple />
         </CartButton>
       </CardBuyOutContent>

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import * as RadioGroup from '@radix-ui/react-radio-group'
 
-export const Container = styled.div`
+export const Container = styled.form`
   display: grid;
   grid-template-columns: minmax(0, 640px) minmax(0, 448px);
   column-gap: 2rem;
@@ -20,7 +21,7 @@ export const AddressContainer = styled.div``
 
 export const AddressContent = styled.div`
   width: 100%;
-  height: 23.25rem;
+  min-height: 23.25rem;
   background-color: ${(props) => props.theme.baseCard};
   border-radius: 6px;
 `
@@ -112,52 +113,6 @@ export const PaymentContainer = styled.div`
   border-radius: 6px;
 `
 
-export const PaymentButtonWrapper = styled.div`
-  display: flex;
-  margin: 0 2.5rem 2.5rem 2.5rem;
-  gap: 0.75rem;
-`
-
-export const PaymentTypeButton = styled.button`
-  max-width: 11.125rem;
-  width: 100%;
-  height: 3.187rem;
-  background-color: ${(props) => props.theme.baseButton};
-  border: 1px solid ${(props) => props.theme.baseButton};
-  border-radius: 6px;
-
-  &:hover {
-    background-color: ${(props) => props.theme.baseHover};
-  }
-
-  &:focus {
-    background-color: ${(props) => props.theme.purpleLight};
-    border: 1px solid ${(props) => props.theme.purple};
-  }
-
-  div {
-    display: flex;
-    align-items: center;
-    padding-left: 1rem;
-    gap: 0.75rem;
-
-    svg {
-      color: ${(props) => props.theme.purple};
-      width: 1rem;
-      height: 1rem;
-    }
-
-    p {
-      text-transform: uppercase;
-      font-family: ${(props) => props.theme.fontFamily.Text};
-      font-size: ${(props) => props.theme.text.fontSize.xs};
-      font-weight: ${(props) => props.theme.text.weight.s};
-      line-height: ${(props) => props.theme.text.lineHeight.s};
-      color: ${(props) => props.theme.baseText};
-    }
-  }
-`
-
 export const BuyoutContainer = styled.div`
   max-width: 28rem;
   width: 100%;
@@ -221,5 +176,75 @@ export const ConfirmOrderButton = styled.button`
     line-height: ${(props) => props.theme.text.lineHeight.buttonG};
     color: ${(props) => props.theme.white};
     text-transform: uppercase;
+  }
+`
+export const FormErrorMessage = styled.p`
+  color: red;
+  font-size: ${(props) => props.theme.text.fontSize.xs};
+`
+
+export const InputWrapperWithErrorMessages = styled.div`
+  display: flex;
+  gap: 0.75rem;
+`
+
+export const Wrapper = styled.div`
+  display: flex;
+`
+
+export const PaymentButtonWrapper = styled(RadioGroup.Root)`
+  display: flex;
+  margin: 0 2.5rem 2.5rem 2.5rem;
+  gap: 0.75rem;
+`
+interface TransactionTypeButtonProps {
+  variant: 'credit' | 'debit' | 'money'
+}
+
+export const PaymentTypeButton = styled(
+  RadioGroup.Item,
+)<TransactionTypeButtonProps>`
+  max-width: 11.125rem;
+  width: 100%;
+  height: 3.187rem;
+  background-color: ${(props) => props.theme.baseButton};
+  border: 1px solid ${(props) => props.theme.baseButton};
+  border-radius: 6px;
+  cursor: pointer;
+
+  &[data-state='unchecked']:hover {
+    transition: background-color 0.2s;
+    background-color: ${(props) => props.theme.baseHover};
+  }
+
+  &[data-state='checked']:focus {
+    background-color: ${(props) => props.theme.baseHover};
+    border: 1px solid ${(props) => props.theme.purple};
+  }
+
+  &[data-state='checked'] {
+    background-color: ${(props) => props.theme.baseHover};
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    gap: 0.75rem;
+
+    svg {
+      color: ${(props) => props.theme.purple};
+      width: 1rem;
+      height: 1rem;
+    }
+
+    p {
+      text-transform: uppercase;
+      font-family: ${(props) => props.theme.fontFamily.Text};
+      font-size: ${(props) => props.theme.text.fontSize.xs};
+      font-weight: ${(props) => props.theme.text.weight.s};
+      line-height: ${(props) => props.theme.text.lineHeight.s};
+      color: ${(props) => props.theme.baseText};
+    }
   }
 `

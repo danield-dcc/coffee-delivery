@@ -9,7 +9,7 @@ import {
   Container,
   StatusCard,
 } from './styles'
-import SuccessImg from '../../assets/success/Illustration.svg'
+import SuccessImg from '../../assets/Success/Illustration.svg'
 
 import { MapPin, Clock, CurrencyDollar } from 'phosphor-react'
 

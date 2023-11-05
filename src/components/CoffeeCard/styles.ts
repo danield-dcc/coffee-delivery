@@ -150,6 +150,10 @@ export const CartButton = styled.button`
   height: 2.375rem;
   border-radius: 6px;
 
+  &:hover {
+    background-color: ${(props) => props.theme.purple};
+  }
+
   svg {
     color: #fff;
   }

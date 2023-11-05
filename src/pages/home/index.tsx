@@ -20,9 +20,17 @@ import coffeDelivery from '../../assets/HeroSection/CoffeDelivery.png'
 
 import data from '../../../db/db.json'
 import { CoffeeCard } from '../../components/CoffeeCard'
+import { useBuyoutCoffeeContext } from '../../contexts/CoffeeContext'
 
 export function Home() {
-  // console.log(coffes)
+  const { handleSelectCoffeesToBuy, selectedCoffees } = useBuyoutCoffeeContext()
+
+  function getTotalNumberOfSelectedCoffees(id: number) {
+    const totalNumber = selectedCoffees.find((item) => item.id === id)
+
+    return totalNumber?.total
+  }
+
   return (
     <>
       <HeroSectionContainer>
@@ -79,6 +87,8 @@ export function Home() {
             tag={items.tags}
             value={items.value}
             image={items.coffeeImageUrl}
+            buyCoffee={() => handleSelectCoffeesToBuy(items)}
+            total={getTotalNumberOfSelectedCoffees(items.id)}
           />
         ))}
       </DisplayCofferCards>

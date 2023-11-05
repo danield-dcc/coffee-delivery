@@ -9,30 +9,90 @@ import {
   RemoveCoffee,
   WrapperBuyoutCardButtons,
 } from './styles'
-import coffeeImage from '../../assets/CoffeeIcons/Americano.png'
 import { Trash } from 'phosphor-react'
-import { moneyFormatter } from '../../utils/moneyFormater'
+import { moneyFormatter } from '../../utils/moneyFormatter'
+import { useEffect, useState } from 'react'
+import { useBuyoutCoffeeContext } from '../../contexts/CoffeeContext'
 
-export function BuyoutCoffeeCard() {
+interface IBuyoutCoffeeCardProps {
+  name: string
+  total: number | undefined
+  imageUrl: string
+  value: number
+  coffeeId: number
+  description: string
+  tags: string[]
+}
+
+export function BuyoutCoffeeCard({
+  coffeeId,
+  name,
+  total,
+  imageUrl,
+  value,
+  description,
+  tags,
+}: IBuyoutCoffeeCardProps) {
+  const {
+    handleRemoveCoffee,
+    setNumberOfCoffeesSelected,
+    updateListOfCoffees,
+  } = useBuyoutCoffeeContext()
+  const [totalCoffees, setTotalCoffees] = useState<number>(total || 0)
+
+  function handleUpdate(value: number) {
+    const newList = {
+      id: coffeeId,
+      name,
+      description,
+      tags,
+      value,
+      coffeeImageUrl: imageUrl,
+      total: totalCoffees,
+    }
+    updateListOfCoffees(newList, value)
+  }
+
+  function handleRemoveCoffeeFromList() {
+    handleRemoveCoffee(coffeeId)
+  }
+
+  function handleSubtractCoffee() {
+    if (totalCoffees > 0) setTotalCoffees((oldV) => oldV - 1)
+    handleUpdate(totalCoffees - 1)
+  }
+
+  function handleAddCoffee() {
+    setTotalCoffees((oldV) => oldV + 1)
+    handleUpdate(totalCoffees + 1)
+  }
+
+  useEffect(() => {
+    setNumberOfCoffeesSelected(totalCoffees)
+  }, [setNumberOfCoffeesSelected, totalCoffees])
+
   return (
     <Container>
-      <BuyoutCoffeeImage src={coffeeImage} alt="" />
+      <BuyoutCoffeeImage src={imageUrl} alt="" />
 
       <BuyoutCoffeeContent>
-        <p>Expresso Tradicional</p>
+        <p>{name}</p>
         <WrapperBuyoutCardButtons>
           <div>
-            <BuyoutSubtractCoffeeButton>
+            <BuyoutSubtractCoffeeButton
+              type="button"
+              onClick={handleSubtractCoffee}
+            >
               <p>-</p>
             </BuyoutSubtractCoffeeButton>
             <BuyoutShowTotalCoffees>
-              <p>1</p>
+              <p>{totalCoffees}</p>
             </BuyoutShowTotalCoffees>
-            <BuyoutAddCoffeeButton>
+            <BuyoutAddCoffeeButton type="button" onClick={handleAddCoffee}>
               <p>+</p>
             </BuyoutAddCoffeeButton>
           </div>
-          <RemoveCoffee>
+          <RemoveCoffee onClick={handleRemoveCoffeeFromList}>
             <Trash />
             <p>Remover</p>
           </RemoveCoffee>
@@ -40,7 +100,7 @@ export function BuyoutCoffeeCard() {
       </BuyoutCoffeeContent>
 
       <BuyoutCoffeeValue>
-        <p>{moneyFormatter.format(9.99)}</p>
+        <p>{moneyFormatter.format(value / 100)}</p>
       </BuyoutCoffeeValue>
     </Container>
   )
