@@ -39,6 +39,7 @@ export const ShoppingCartButton = styled.button`
   display: flex;
   align-items: center;
   position: relative;
+  cursor: pointer;
 
   border: 0;
   padding: 0 0.5rem;

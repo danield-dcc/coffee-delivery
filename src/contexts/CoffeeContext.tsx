@@ -8,6 +8,17 @@ import {
   useState,
 } from 'react'
 
+interface IUserPaymentData {
+  number: string
+  cep: string
+  street: string
+  district: string
+  city: string
+  state: string
+  type: 'credit' | 'debit' | 'money'
+  complement?: string | undefined
+}
+
 type SelectedCoffeeProps = {
   id: number
   tags: string[]
@@ -37,6 +48,9 @@ interface BuyoutCoffeeType {
     data: IHandleSelectCoffeesToBuyType,
     value?: number,
   ) => SelectedCoffeeProps[]
+  saveUserPaymentData: (data: IUserPaymentData) => void
+  getUserPaymentData: () => IUserPaymentData
+  deleteUserPaymentData: () => void
 }
 
 export const BuyoutCoffeeContext = createContext({} as BuyoutCoffeeType)
@@ -119,6 +133,26 @@ export function BuyoutCoffeeProvider({ children }: BuyoutCoffeeProviderProps) {
     setToLocalStorage(newCoffeeList)
   }
 
+  function saveUserPaymentData(data: IUserPaymentData) {
+    const stateJSON = JSON.stringify(data)
+
+    localStorage.setItem('@coffee-delivery:user-payment-data', stateJSON)
+  }
+
+  function getUserPaymentData() {
+    const storedStateAsJSON = localStorage.getItem(
+      '@coffee-delivery:user-payment-data',
+    )
+
+    if (storedStateAsJSON) {
+      return JSON.parse(storedStateAsJSON)
+    }
+  }
+
+  function deleteUserPaymentData() {
+    localStorage.removeItem('@coffee-delivery:user-payment-data')
+  }
+
   useEffect(() => {
     setToLocalStorage(selectedCoffees)
   }, [selectedCoffees])
@@ -132,6 +166,9 @@ export function BuyoutCoffeeProvider({ children }: BuyoutCoffeeProviderProps) {
         setNumberOfCoffeesSelected,
         handleRemoveCoffee,
         updateListOfCoffees,
+        saveUserPaymentData,
+        getUserPaymentData,
+        deleteUserPaymentData,
       }}
     >
       {children}

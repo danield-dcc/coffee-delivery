@@ -4,6 +4,7 @@ import { BuyoutCoffeeCard } from '../../components/BuyoutCoffeeCard'
 import { useBuyoutCoffeeContext } from '../../contexts/CoffeeContext'
 import { useSummary } from '../../hooks/useSummary'
 import { moneyFormatter } from '../../utils/moneyFormatter'
+import { useNavigate } from 'react-router-dom'
 import {
   AddressContent,
   AddressContainer,
@@ -25,6 +26,7 @@ import {
   FormErrorMessage,
   InputWrapperWithErrorMessages,
   Wrapper,
+  PaymentButtonWrapperErrorMessage,
 } from './styles'
 import {
   MapPinLine,
@@ -43,13 +45,16 @@ const CheckoutUserAddressSchema = z.object({
   district: z.string().min(3, { message: 'Entre com um nome válido' }),
   city: z.string().min(3, { message: 'Entre com um nome válido' }),
   state: z.string().min(2, { message: 'UF inválido' }),
-  type: z.enum(['credit', 'debit', 'money']),
+  type: z.enum(['credit', 'debit', 'money'], {
+    required_error: 'Selecione uma forma de pagamento!',
+  }),
 })
 
 type CheckoutUserAddressData = z.infer<typeof CheckoutUserAddressSchema>
 
 export function Checkout() {
-  const { selectedCoffees } = useBuyoutCoffeeContext()
+  const { selectedCoffees, saveUserPaymentData } = useBuyoutCoffeeContext()
+  const navigate = useNavigate()
   const totalItems = useSummary()
   const transportationPrice = 3.14
   const totalValues = totalItems + transportationPrice
@@ -65,7 +70,8 @@ export function Checkout() {
   })
 
   function handleSubmitUserAddress(data: CheckoutUserAddressData) {
-    console.log(data)
+    saveUserPaymentData(data)
+    navigate('/success')
   }
 
   return (
@@ -187,41 +193,48 @@ export function Checkout() {
             name="type"
             render={({ field }) => {
               return (
-                <PaymentButtonWrapper
-                  onValueChange={field.onChange}
-                  value={field.value}
-                >
-                  <PaymentTypeButton
-                    type="button"
-                    variant="credit"
-                    value="credit"
+                <>
+                  <PaymentButtonWrapper
+                    onValueChange={field.onChange}
+                    value={field.value}
                   >
-                    <div>
-                      <CreditCard />
-                      <p>Cartão de crédito</p>
-                    </div>
-                  </PaymentTypeButton>
-                  <PaymentTypeButton
-                    type="button"
-                    variant="debit"
-                    value="debit"
-                  >
-                    <div>
-                      <Bank />
-                      <p>Cartão de débito</p>
-                    </div>
-                  </PaymentTypeButton>
-                  <PaymentTypeButton
-                    type="button"
-                    variant="money"
-                    value="money"
-                  >
-                    <div>
-                      <Money />
-                      <p>Dinheiro</p>
-                    </div>
-                  </PaymentTypeButton>
-                </PaymentButtonWrapper>
+                    <PaymentTypeButton
+                      type="button"
+                      variant="credit"
+                      value="credit"
+                    >
+                      <div>
+                        <CreditCard />
+                        <p>Cartão de crédito</p>
+                      </div>
+                    </PaymentTypeButton>
+                    <PaymentTypeButton
+                      type="button"
+                      variant="debit"
+                      value="debit"
+                    >
+                      <div>
+                        <Bank />
+                        <p>Cartão de débito</p>
+                      </div>
+                    </PaymentTypeButton>
+                    <PaymentTypeButton
+                      type="button"
+                      variant="money"
+                      value="money"
+                    >
+                      <div>
+                        <Money />
+                        <p>Dinheiro</p>
+                      </div>
+                    </PaymentTypeButton>
+                  </PaymentButtonWrapper>
+                  <PaymentButtonWrapperErrorMessage>
+                    <FormErrorMessage>
+                      {errors.type && errors.type.message}
+                    </FormErrorMessage>
+                  </PaymentButtonWrapperErrorMessage>
+                </>
               )
             }}
           />

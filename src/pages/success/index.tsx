@@ -12,8 +12,17 @@ import {
 import SuccessImg from '../../assets/Success/Illustration.svg'
 
 import { MapPin, Clock, CurrencyDollar } from 'phosphor-react'
+import { useBuyoutCoffeeContext } from '../../contexts/CoffeeContext'
+
+const PaymentType = {
+  debit: 'Débito',
+  credit: 'Cartão de crédito',
+  money: 'Dinheiro',
+}
 
 export function Success() {
+  const { getUserPaymentData } = useBuyoutCoffeeContext()
+  const userPaymentData = getUserPaymentData()
   return (
     <Container>
       <ConfirmationCard>
@@ -30,9 +39,12 @@ export function Success() {
             </CardIcon>
             <CarStatus>
               <p>
-                Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                Entrega em{' '}
+                <strong>
+                  {userPaymentData?.street}, {userPaymentData?.number}
+                </strong>
               </p>
-              <p>Farrapos - Porto Alegre, RS</p>
+              <p>{`${userPaymentData?.district} - ${userPaymentData?.city}, ${userPaymentData?.state}`}</p>
             </CarStatus>
           </CardContent>
           <CardContent>
@@ -53,7 +65,7 @@ export function Success() {
             <CarStatus>
               <p>Pagamento na entrega</p>
               <p>
-                <strong>Cartão de Crédito</strong>
+                <strong>{PaymentType[userPaymentData.type]}</strong>
               </p>
             </CarStatus>
           </CardContent>

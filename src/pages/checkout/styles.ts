@@ -155,6 +155,7 @@ export const ConfirmOrderButton = styled.button`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   margin: 0 auto;
   max-width: 23rem;
@@ -192,9 +193,15 @@ export const Wrapper = styled.div`
   display: flex;
 `
 
+export const PaymentButtonWrapperErrorMessage = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0.625rem 2.5rem 2.5rem 2.5rem;
+`
+
 export const PaymentButtonWrapper = styled(RadioGroup.Root)`
   display: flex;
-  margin: 0 2.5rem 2.5rem 2.5rem;
+  margin: 0 2.5rem 0 2.5rem;
   gap: 0.75rem;
 `
 interface TransactionTypeButtonProps {

@@ -45,6 +45,7 @@ export const BuyoutAddCoffeeButton = styled.button`
   align-items: center;
   justify-content: center;
   border: none;
+  cursor: pointer;
   background-color: ${(props) => props.theme.baseButton};
   border-radius: 0 6px 6px 0;
 
@@ -66,31 +67,9 @@ export const BuyoutAddCoffeeButton = styled.button`
   }
 `
 
-export const BuyoutSubtractCoffeeButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background-color: ${(props) => props.theme.baseButton};
+export const BuyoutSubtractCoffeeButton = styled(BuyoutAddCoffeeButton)`
   border-radius: 6px 0 0 6px;
   margin-left: 1.25rem;
-
-  height: 2rem;
-  width: 2rem;
-
-  &:focus {
-    border: 1.5px solid ${(props) => props.theme.purpleDark};
-  }
-
-  &:hover {
-    p {
-      color: ${(props) => props.theme.purpleDark};
-    }
-  }
-
-  p {
-    color: ${(props) => props.theme.purple};
-  }
 `
 
 export const BuyoutShowTotalCoffees = styled.div`
