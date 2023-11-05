@@ -25,7 +25,7 @@
     },
     {
         "id": 4,
-        "name": "Expresso Gelado",
+        "name": "Expresso Cremoso",
         "tags": ["Tradicional", "Gelado"],
         "description": "Bebida preparada com café expresso e cubos de gelo",
         "coffeeImageUrl": "/src/assets/CoffeeIcons/Expresso-Cremoso.png",
