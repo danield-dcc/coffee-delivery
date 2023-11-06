@@ -10,6 +10,7 @@ import coffeeLogo from '../../assets/Logo.svg'
 import shoppingCart from '../../assets/shopping_cart.svg'
 import mapIndicator from '../../assets/map_indicator.svg'
 import { useBuyoutCoffeeContext } from '../../contexts/CoffeeContext'
+import { Link } from 'react-router-dom'
 
 export function Header() {
   const { selectedCoffees } = useBuyoutCoffeeContext()
@@ -17,18 +18,18 @@ export function Header() {
 
   return (
     <Container>
-      <a href="/">
+      <Link to="/">
         <IconWrapper>
           <img src={coffeeLogo} alt="" />
         </IconWrapper>
-      </a>
+      </Link>
       <UserItens>
         <LocalMapButton>
           <img src={mapIndicator} alt="" />
           <p>Porto Alegre, RS</p>
         </LocalMapButton>
 
-        <a href="/checkout">
+        <Link to="/checkout">
           <ShoppingCartButton>
             {hasSelectedCoffees && (
               <ShoppingCartToggle>
@@ -37,7 +38,7 @@ export function Header() {
             )}
             <img src={shoppingCart} alt="" />
           </ShoppingCartButton>
-        </a>
+        </Link>
       </UserItens>
     </Container>
   )
