@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import {
   CarStatus,
   CardContent,
@@ -21,8 +22,13 @@ const PaymentType = {
 }
 
 export function Success() {
-  const { getUserPaymentData } = useBuyoutCoffeeContext()
+  const { getUserPaymentData, removeUserSelectionFromLocalStorage } =
+    useBuyoutCoffeeContext()
   const userPaymentData = getUserPaymentData()
+
+  useEffect(() => {
+    removeUserSelectionFromLocalStorage()
+  }, [removeUserSelectionFromLocalStorage])
   return (
     <Container>
       <ConfirmationCard>

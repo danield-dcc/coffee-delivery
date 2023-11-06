@@ -51,6 +51,7 @@ interface BuyoutCoffeeType {
   saveUserPaymentData: (data: IUserPaymentData) => void
   getUserPaymentData: () => IUserPaymentData
   deleteUserPaymentData: () => void
+  removeUserSelectionFromLocalStorage: () => void
 }
 
 export const BuyoutCoffeeContext = createContext({} as BuyoutCoffeeType)
@@ -61,7 +62,7 @@ interface BuyoutCoffeeProviderProps {
 
 export function BuyoutCoffeeProvider({ children }: BuyoutCoffeeProviderProps) {
   const [selectedCoffees, setSelectedCoffees] = useState<SelectedCoffeeProps[]>(
-    getFromLocalStage(),
+    getUserSelectionFromLocalStage(),
   )
   const [numberOfCoffeesSelected, setNumberOfCoffeesSelected] = useState(0)
 
@@ -108,13 +109,13 @@ export function BuyoutCoffeeProvider({ children }: BuyoutCoffeeProviderProps) {
     return updatedTotalNumberOfCoffees
   }
 
-  function setToLocalStorage(data: SelectedCoffeeProps[]) {
+  function setUserSelectionToLocalStorage(data: SelectedCoffeeProps[]) {
     const stateJSON = JSON.stringify(data)
 
     localStorage.setItem('@coffee-delivery:user-selection', stateJSON)
   }
 
-  function getFromLocalStage(): SelectedCoffeeProps[] {
+  function getUserSelectionFromLocalStage(): SelectedCoffeeProps[] {
     const storedStateAsJSON = localStorage.getItem(
       '@coffee-delivery:user-selection',
     )
@@ -126,11 +127,16 @@ export function BuyoutCoffeeProvider({ children }: BuyoutCoffeeProviderProps) {
     return []
   }
 
+  function removeUserSelectionFromLocalStorage() {
+    localStorage.removeItem('@coffee-delivery:user-selection')
+    setSelectedCoffees([])
+  }
+
   function handleRemoveCoffee(id: number) {
     const newCoffeeList = selectedCoffees.filter((item) => item.id !== id)
 
     setSelectedCoffees(newCoffeeList)
-    setToLocalStorage(newCoffeeList)
+    setUserSelectionToLocalStorage(newCoffeeList)
   }
 
   function saveUserPaymentData(data: IUserPaymentData) {
@@ -154,7 +160,7 @@ export function BuyoutCoffeeProvider({ children }: BuyoutCoffeeProviderProps) {
   }
 
   useEffect(() => {
-    setToLocalStorage(selectedCoffees)
+    setUserSelectionToLocalStorage(selectedCoffees)
   }, [selectedCoffees])
 
   return (
@@ -169,6 +175,7 @@ export function BuyoutCoffeeProvider({ children }: BuyoutCoffeeProviderProps) {
         saveUserPaymentData,
         getUserPaymentData,
         deleteUserPaymentData,
+        removeUserSelectionFromLocalStorage,
       }}
     >
       {children}
